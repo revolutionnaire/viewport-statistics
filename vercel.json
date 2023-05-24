@@ -5,12 +5,6 @@
           "use": "@vercel/node"
       }
   ],
-  "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "app.js"
-      }
-  ],
   "rewrites": [
     { "source": "/statistics", "destination": "/views/statistics.ejs" },
     { "source": "/(.*)", "destination": "/views/home.ejs" }
