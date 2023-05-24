@@ -6,7 +6,7 @@
       }
   ],
   "rewrites": [
-    { "source": "/statistics", "destination": "/views/statistics.ejs" },
-    { "source": "/(.*)", "destination": "/views/home.ejs" }
+    { "source": "/statistics", "destination": "app.js" },
+    { "source": "/(.*)", "destination": "app.js" }
   ]
 }
