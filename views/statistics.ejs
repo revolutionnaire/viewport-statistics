@@ -10,16 +10,16 @@
           <td>
             <h4 class="label">Desktop</h4>
             <hr />
-            <h3 class="data"><%= averageViewport.desktop %><sup>px</sup></h3>
+            <h3 class="data"><%= averageViewport.desktop.size %><sup>px</sup></h3>
             <hr />
-            <h4 class="data-secondary">Total of <%= Object.keys(averageViewport.desktop).length; %> visitors</h4>
+            <h4 class="data-secondary">Total of <%= averageViewport.desktop.count; %> visits</h4>
           </td>
           <td>
             <h4 class="label">Mobile</h4>
             <hr />
-            <h3 class="data"><%= averageViewport.mobile %><sup>px</sup></h3>
+            <h3 class="data"><%= averageViewport.mobile.size %><sup>px</sup></h3>
             <hr />
-            <h4 class="data-secondary">Total of <%= Object.keys(averageViewport.mobile).length; %> visitors</h4>
+            <h4 class="data-secondary">Total of <%= averageViewport.mobile.count; %> visits</h4>
           </td>
         </tr>
       </table>

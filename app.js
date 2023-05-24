@@ -102,8 +102,15 @@ function calculateAverageViewport(data) {
   const averageMobileHeight = mobileCount > 0 ? totalMobileHeight / mobileCount : 0;
 
   return {
-    desktop: `${Math.round(averageDesktopWidth)}x${Math.round(averageDesktopHeight)}`,
-    mobile: `${Math.round(averageMobileWidth)}x${Math.round(averageMobileHeight)}`
+    desktop: {
+      size: `${Math.round(averageDesktopWidth)}x${Math.round(averageDesktopHeight)}`,
+      count: desktopCount,
+    },
+    mobile: {
+      size: `${Math.round(averageMobileWidth)}x${Math.round(averageMobileHeight)}`,
+      count: mobileCount
+    }
+
   };
 }
 
