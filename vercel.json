@@ -1,10 +1,18 @@
 {
-	"version": 2,
   "builds": [
-    { "src": "app.js", "use": "@vercel/node" }
+      {
+          "src": "app.js",
+          "use": "@vercel/node"
+      }
   ],
-  "rewrites": [
-    { "source": "/statistics", "destination": "/views/statistics.ejs", "headers": { "content-type": "text/html; charset=utf-8" } },
-    { "source": "/(.*)", "destination": "/views/home.ejs", "headers": { "content-type": "text/html; charset=utf-8" } }
+  "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "app.js"
+      },
+      {
+        "src": "/statistics(.*)",
+        "dest": "app.js"
+      }
   ]
 }
