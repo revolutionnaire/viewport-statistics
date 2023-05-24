@@ -3,8 +3,8 @@
   "builds": [
     { "src": "app.js", "use": "@vercel/node" }
   ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/home.ejs" },
-    { "src": "/statistics(.*)", "dest": "/statistics.ejs" }
+  "rewrites": [
+    { "source": "/statistics", "destination": "/views/statistics.ejs", "headers": { "content-type": "text/html; charset=utf-8" } },
+    { "source": "/(.*)", "destination": "/views/home.ejs", "headers": { "content-type": "text/html; charset=utf-8" } }
   ]
 }
