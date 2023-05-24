@@ -10,6 +10,9 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
+// Set the views directory
+app.set('views', path.join(__dirname, 'views'));
+
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 
