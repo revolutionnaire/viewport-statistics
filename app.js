@@ -17,7 +17,7 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 
 // Use the public folder to store assets
-app.use(express.static('public'));
+app.use(express.static('./public'));
 
 // Body parsing middleware
 app.use(express.urlencoded({ extended: true }));
