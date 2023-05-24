@@ -4,6 +4,7 @@
   "description": "A simple web application to collect user's viewport data and display the average for each device type.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "test"
   },
   "repository": {
