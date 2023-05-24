@@ -10,5 +10,9 @@
         "src": "/(.*)",
         "dest": "app.js"
       }
+  ],
+  "rewrites": [
+    { "source": "/statistics", "destination": "/views/statistics.ejs", "headers": { "content-type": "text/html; charset=utf-8" } },
+    { "source": "/(.*)", "destination": "/views/home.ejs", "headers": { "content-type": "text/html; charset=utf-8" } }
   ]
 }
