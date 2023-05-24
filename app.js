@@ -1,12 +1,12 @@
 const express = require('express');
 const admin = require('firebase-admin');
+const path = require('path');
 
 // Initialize Express.js
 const app = express();
 
 // Configure Firebase Admin SDK
-const serviceAccount = require('./firebase-credentials.json');
-admin.initializeApp({
+const serviceAccount = require('./firebase-credentials.json'); admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
@@ -17,7 +17,8 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 
 // Use the public folder to store assets
-app.use(express.static('./public'));
+app.use(express.static('public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Body parsing middleware
 app.use(express.urlencoded({ extended: true }));
