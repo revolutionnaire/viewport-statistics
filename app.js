@@ -58,7 +58,8 @@ app.post('/capture', (req, res) => {
         const time = new Date();
         const cookieExpiration = time.getTime() + (10 * 365 * 24 * 60 * 60 * 1000);
 
-        res.cookie('viewportDataSaved', 'true', new Date(cookieExpiration), {
+        res.cookie('viewportDataSaved', 'true', {
+          expires: new Date(cookieExpiration),
           httpOnly: false
         });
 
