@@ -49,6 +49,10 @@ td {
   display: block;
 }
 
+.hidden {
+  display: none;
+}
+
 .label {
   text-transform: capitalize;
   margin-top: 0;
