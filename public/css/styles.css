@@ -94,6 +94,7 @@ hr {
 }
 
 #statistics .data-secondary {
+  text-transform: capitalize;
   margin-bottom: 0;
 }
 
