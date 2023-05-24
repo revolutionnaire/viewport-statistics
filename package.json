@@ -1,0 +1,28 @@
+{
+  "name": "viewport-statistics",
+  "version": "1.0.0",
+  "description": "A simple web application to collect user's viewport data and display the average for each device type.",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revolutionnaire/viewport-statistics.git"
+  },
+  "keywords": [
+    "viewport",
+    "statistics"
+  ],
+  "author": "Samuel Bacay",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/revolutionnaire/viewport-statistics/issues"
+  },
+  "homepage": "https://github.com/revolutionnaire/viewport-statistics#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.8.0"
+  }
+}

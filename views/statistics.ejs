@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <%- include('includes/head.ejs'); %>
+<body id="statistics">
+  <center>
+    <h1>Averages</h1>
+    <% if (averageViewport) { %>
+      <table>
+        <tr>
+          <td>
+            <h4 class="label">Desktop</h4>
+            <h3 class="data"><%= averageViewport.desktop %><sup>px</sup></h3>
+          </td>
+          <td>
+            <h4 class="label">Mobile</h4>
+            <h3 class="data"><%= averageViewport.mobile %><sup>px</sup></h3>
+          </td>
+        </tr>
+      </table>
+    <% } else { %>
+      <p>No viewport data available yet.</p>
+    <% } %>
+    <a href="/">Back to your dimensions</a>
+  </center>
+</body>
+</html>
