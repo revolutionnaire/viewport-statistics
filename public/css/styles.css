@@ -49,6 +49,12 @@ td {
   display: block;
 }
 
+hr {
+  background-color: #000;
+  height: 3px;
+  border: 0px solid transparent;
+}
+
 .hidden {
   display: none;
 }
@@ -84,6 +90,10 @@ td {
 }
 
 #home .data:first-of-type {
+  margin-bottom: 0;
+}
+
+#statistics .data-secondary {
   margin-bottom: 0;
 }
 
