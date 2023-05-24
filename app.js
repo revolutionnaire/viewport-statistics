@@ -1,6 +1,7 @@
 const express = require('express');
 const admin = require('firebase-admin');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 // Initialize Express.js
 const app = express();
@@ -23,37 +24,55 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 // Body parsing middleware
 app.use(express.urlencoded({ extended: true }));
 
+// Cooking parsing middleware
+app.use(cookieParser());
+
 // Firestore setup
 const db = admin.firestore();
 const viewportDataCollection = db.collection('viewportData');
 
-// Capture viewport data
 app.get('/', (req, res) => {
   res.render('home');
 });
 
+// Capture viewport data
 app.post('/capture', (req, res) => {
   const { width, height } = req.body;
   const userAgent = req.headers['user-agent'];
   const deviceType = getDeviceType(userAgent);
 
-  const data = {
-    width: parseInt(width),
-    height: parseInt(height),
-    deviceType,
-    timestamp: new Date()
-  };
+	if (!req.cookies.viewportDataSaved) {
 
-  viewportDataCollection
-    .add(data)
-    .then(() => {
-      console.log('Viewport data captured and stored successfully');
-      res.send('Viewport data captured');
-    })
-    .catch(error => {
-      console.error('Error storing viewport data:', error);
-      res.status(500).send('Internal Server Error');
-    });
+    const data = {
+      width: parseInt(width),
+      height: parseInt(height),
+      deviceType,
+      timestamp: new Date()
+    };
+
+    viewportDataCollection
+      .add(data)
+      .then(() => {
+        console.log('Viewport data captured and stored successfully');
+
+        const time = new Date();
+        const cookieExpiration = time.getTime() + (10 * 365 * 24 * 60 * 60 * 1000);
+
+        res.cookie('viewportDataSaved', 'true', new Date(cookieExpiration), {
+          httpOnly: false
+        });
+
+        res.send('Viewport data captured');
+      })
+      .catch(error => {
+        console.error('Error storing viewport data:', error);
+        res.status(500).send('Internal Server Error');
+      });
+
+  } else {
+    res.send('Viewport data already captured.');
+  }
+
 });
 
 // Calculate average viewport data

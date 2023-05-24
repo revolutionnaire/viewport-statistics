@@ -32,12 +32,12 @@
       })
         .then(response => response.text())
         .then(data => {
-          document.getElementById('viewportWidth').innerText = window.innerWidth;
-          document.getElementById('viewportHeight').innerText = window.innerHeight;
-          document.getElementById('screenWidth').innerText = screen.width;
-          document.getElementById('screenHeight').innerText = screen.height;
-          document.getElementById('notification').classList.add('hidden');
-          document.getElementById('dataViewport').classList.remove('hidden');
+            document.getElementById('viewportWidth').innerText = window.innerWidth;
+            document.getElementById('viewportHeight').innerText = window.innerHeight;
+            document.getElementById('screenWidth').innerText = screen.width;
+            document.getElementById('screenHeight').innerText = screen.height;
+            document.getElementById('notification').classList.add('hidden');
+            document.getElementById('dataViewport').classList.remove('hidden');
         })
         .catch(error => {
           console.error('Error capturing viewport data:', error);
