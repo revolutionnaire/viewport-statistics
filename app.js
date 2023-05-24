@@ -25,7 +25,7 @@ const viewportDataCollection = db.collection('viewportData');
 
 // Capture viewport data
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('views/home');
 });
 
 app.post('/capture', (req, res) => {
@@ -59,7 +59,7 @@ app.get('/statistics', (req, res) => {
     .then(querySnapshot => {
       const viewportData = querySnapshot.docs.map(doc => doc.data());
       const averageViewport = calculateAverageViewport(viewportData);
-      res.render('statistics', { averageViewport });
+      res.render('views/statistics', { averageViewport });
     })
     .catch(error => {
       console.error('Error retrieving viewport data:', error);
