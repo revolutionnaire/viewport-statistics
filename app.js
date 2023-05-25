@@ -63,7 +63,7 @@ app.post('/capture', (req, res) => {
           httpOnly: false
         });
 
-        res.send('Viewport data captured');
+        res.send('Viewport data captured.');
       })
       .catch(error => {
         console.error('Error storing viewport data:', error);
@@ -71,7 +71,7 @@ app.post('/capture', (req, res) => {
       });
 
   } else {
-    res.send('Viewport data already captured.');
+    res.send('Viewport data already stored in database.');
   }
 
 });
