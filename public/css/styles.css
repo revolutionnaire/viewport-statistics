@@ -89,6 +89,12 @@ hr {
   margin-bottom: 0;
 }
 
+.footnote,
+#home #appDescription {
+  width: 360px;
+  text-align: left;
+}
+
 #statistics .data-secondary {
   text-transform: capitalize;
   margin-bottom: 0;
