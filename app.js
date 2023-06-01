@@ -32,7 +32,8 @@ const db = admin.firestore();
 const viewportDataCollection = db.collection('viewportData');
 
 app.get('/', (req, res) => {
-  res.render('home');
+  const pageTitle = 'Home';
+  res.render('home', { pageTitle });
 });
 
 // Capture viewport data
@@ -78,12 +79,14 @@ app.post('/capture', (req, res) => {
 
 // Calculate average viewport data
 app.get('/statistics', (req, res) => {
+  const pageTitle = 'Statistics';
+
   viewportDataCollection
     .get()
     .then(querySnapshot => {
       const viewportData = querySnapshot.docs.map(doc => doc.data());
       const averageViewport = calculateAverageViewport(viewportData);
-      res.render('statistics', { averageViewport });
+      res.render('statistics', { averageViewport, pageTitle });
     })
     .catch(error => {
       console.error('Error retrieving viewport data:', error);
