@@ -1,49 +1,47 @@
-const ViewportDataCollectionModel = require('../models/viewportDataCollectionModel');
+const viewportDataCollectionModel = require('../models/viewportDataCollectionModel');
 
-const statisticsService = (req, res) => {
-  const viewportDataCollection = new ViewportDataCollectionModel();
+const calculateAverageViewport = async () => {
+  const viewportDataCollection = new viewportDataCollectionModel();
 
-  viewportDataCollection
-    .getAllViewportData()
-    .then(viewportData => {
-      const averageViewport = calculateAverageViewport(viewportData);
-      const pageTitle = 'Statistics';
-      res.render('statistics', { averageViewport, pageTitle });
-    })
-    .catch(error => {
-      console.error('Error retrieving viewport data:', error);
-      res.status(500).send('Internal Server Error');
-    });
-};
+  const allViewportData = await viewportDataCollection.getAllViewportData();
 
-// Helper function to calculate average dimensions
-function calculateAverageViewport(data) {
-  const desktopData = data.filter(item => item.deviceType === 'Desktop');
-  const mobileData = data.filter(item => item.deviceType === 'Mobile');
+  let desktopViewportCount = 0;
+  let mobileViewportCount = 0;
+  let sumDesktopWidth = 0;
+  let sumDesktopHeight = 0;
+  let sumMobileWidth = 0;
+  let sumMobileHeight = 0;
 
-  const desktopCount = desktopData.length;
-  const mobileCount = mobileData.length;
+  allViewportData.forEach((data) => {
+    const width = Number(data.width);
+    const height = Number(data.height);
+    const deviceType = data.deviceType;
 
-  const totalDesktopWidth = desktopData.reduce((sum, item) => sum + parseInt(item.width), 0);
-  const totalDesktopHeight = desktopData.reduce((sum, item) => sum + parseInt(item.height), 0);
-  const totalMobileWidth = mobileData.reduce((sum, item) => sum + parseInt(item.width), 0);
-  const totalMobileHeight = mobileData.reduce((sum, item) => sum + parseInt(item.height), 0);
+    if (deviceType === 'Desktop') {
+      desktopViewportCount++;
+      sumDesktopWidth += width;
+      sumDesktopHeight += height;
+    } else if (deviceType === 'Mobile') {
+      mobileViewportCount++;
+      sumMobileWidth += width;
+      sumMobileHeight += height;
+    }
+  });
 
-  const averageDesktopWidth = desktopCount > 0 ? totalDesktopWidth / desktopCount : 0;
-  const averageDesktopHeight = desktopCount > 0 ? totalDesktopHeight / desktopCount : 0;
-  const averageMobileWidth = mobileCount > 0 ? totalMobileWidth / mobileCount : 0;
-  const averageMobileHeight = mobileCount > 0 ? totalMobileHeight / mobileCount : 0;
+  const averageDesktopViewport = {
+    size: `${Math.round(sumDesktopWidth / desktopViewportCount)}x${Math.round(sumDesktopHeight / desktopViewportCount)}`,
+    count: desktopViewportCount,
+  };
+
+  const averageMobileViewport = {
+    size: `${Math.round(sumMobileWidth / mobileViewportCount)}x${Math.round(sumMobileHeight / mobileViewportCount)}`,
+    count: mobileViewportCount,
+  };
 
   return {
-    desktop: {
-      size: `${Math.round(averageDesktopWidth)}x${Math.round(averageDesktopHeight)}`,
-      count: desktopCount,
-    },
-    mobile: {
-      size: `${Math.round(averageMobileWidth)}x${Math.round(averageMobileHeight)}`,
-      count: mobileCount,
-    },
+    desktop: averageDesktopViewport,
+    mobile: averageMobileViewport,
   };
-}
+};
 
-module.exports = statisticsService;
+module.exports = { calculateAverageViewport };

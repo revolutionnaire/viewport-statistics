@@ -12,14 +12,14 @@ app.use(cookieParser());
 // Body parsing middleware
 app.use(express.urlencoded({ extended: true }));
 
-// Mount the routes
-app.use('/', routes);
-
 // Set the views directory
 app.set('views', `${__dirname}/views`);
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
+
+// Mount the routes
+app.use('/', routes);
 
 // Use the public folder to store assets
 app.use(express.static('public'));

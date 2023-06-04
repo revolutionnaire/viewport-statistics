@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const serviceAccount = require('./firebase-credentials.json');
-const homeService = require('./services/homeService');
-const captureService = require('./services/captureService');
-const statisticsService = require('./services/statisticsService');
+const homeController = require('./controllers/homeController');
+const captureController = require('./controllers/captureController');
+const statisticsController = require('./controllers/statisticsController');
 
-// Mount the service routers
-router.get('/', homeService);
-router.post('/capture', (res, req) => captureService(res, req));
-router.get('/statistics', (res, req) => statisticsService(res, req));
+// Mount the routers
+router.get('/', homeController);
+router.post('/capture', captureController);
+router.get('/statistics', statisticsController);
 
 module.exports = router;

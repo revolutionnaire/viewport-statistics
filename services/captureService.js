@@ -1,39 +1,32 @@
-const express = require('express');
-const ViewportDataModel = require('../models/viewportDataModel');
-const router = express.Router();
+const db = require('../firebase-config');
 
-// Capture viewport data
-const captureService = (req, res) => {
-  const { width, height } = req.body;
-  const userAgent = req.headers['user-agent'];
-  const deviceType = getDeviceType(userAgent);
+const captureViewportData = (width, height, userAgent) => {
+  return new Promise((resolve, reject) => {
+    const deviceType = getDeviceType(userAgent);
 
-  if (!req.cookies.viewportDataSaved) {
-    const viewportData = new ViewportDataModel(width, height, deviceType);
-    const plainData = viewportData.toObject(); // Convert to plain JavaScript object
+    if (!width || !height) {
+      reject(new Error('Invalid width or height'));
+      return;
+    }
 
-    viewportData
-      .save(plainData) // Pass the plain object to the save method
-      .then((docId) => {
+    const data = {
+      width: parseInt(width),
+      height: parseInt(height),
+      deviceType,
+      timestamp: new Date().toISOString(),
+    };
+
+    db.collection('viewportData')
+      .add(data)
+      .then(() => {
         console.log('Viewport data captured and stored successfully');
-
-        const time = new Date();
-        const cookieExpiration = time.getTime() + 10 * 365 * 24 * 60 * 60 * 1000;
-
-        res.cookie('viewportDataSaved', 'true', {
-          expires: new Date(cookieExpiration),
-          httpOnly: false,
-        });
-
-        res.send('Viewport data captured.');
+        resolve();
       })
       .catch((error) => {
         console.error('Error storing viewport data:', error);
-        res.status(500).send('Internal Server Error');
+        reject(error);
       });
-  } else {
-    res.send('Viewport data already stored in the database.');
-  }
+  });
 };
 
 // Get device type
@@ -48,4 +41,4 @@ function getDeviceType(userAgent) {
   }
 }
 
-module.exports = captureService;
+module.exports = { captureViewportData };
