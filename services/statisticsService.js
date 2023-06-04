@@ -1,15 +1,13 @@
-const express = require('express');
-const router = express.Router();
+const ViewportDataCollectionModel = require('../models/viewportDataCollectionModel');
 
-// Calculate average viewport data
-const statisticsService = (req, res, viewportDataCollection) => {
-  const pageTitle = 'Statistics';
+const statisticsService = (req, res) => {
+  const viewportDataCollection = new ViewportDataCollectionModel();
 
   viewportDataCollection
-    .get()
-    .then(querySnapshot => {
-      const viewportData = querySnapshot.docs.map(doc => doc.data());
+    .getAllViewportData()
+    .then(viewportData => {
       const averageViewport = calculateAverageViewport(viewportData);
+      const pageTitle = 'Statistics';
       res.render('statistics', { averageViewport, pageTitle });
     })
     .catch(error => {
@@ -18,7 +16,7 @@ const statisticsService = (req, res, viewportDataCollection) => {
     });
 };
 
-// Calculate average viewport for desktop and mobile separately
+// Helper function to calculate average dimensions
 function calculateAverageViewport(data) {
   const desktopData = data.filter(item => item.deviceType === 'Desktop');
   const mobileData = data.filter(item => item.deviceType === 'Mobile');
@@ -26,10 +24,10 @@ function calculateAverageViewport(data) {
   const desktopCount = desktopData.length;
   const mobileCount = mobileData.length;
 
-  const totalDesktopWidth = desktopData.reduce((sum, item) => sum + item.width, 0);
-  const totalDesktopHeight = desktopData.reduce((sum, item) => sum + item.height, 0);
-  const totalMobileWidth = mobileData.reduce((sum, item) => sum + item.width, 0);
-  const totalMobileHeight = mobileData.reduce((sum, item) => sum + item.height, 0);
+  const totalDesktopWidth = desktopData.reduce((sum, item) => sum + parseInt(item.width), 0);
+  const totalDesktopHeight = desktopData.reduce((sum, item) => sum + parseInt(item.height), 0);
+  const totalMobileWidth = mobileData.reduce((sum, item) => sum + parseInt(item.width), 0);
+  const totalMobileHeight = mobileData.reduce((sum, item) => sum + parseInt(item.height), 0);
 
   const averageDesktopWidth = desktopCount > 0 ? totalDesktopWidth / desktopCount : 0;
   const averageDesktopHeight = desktopCount > 0 ? totalDesktopHeight / desktopCount : 0;
@@ -43,9 +41,8 @@ function calculateAverageViewport(data) {
     },
     mobile: {
       size: `${Math.round(averageMobileWidth)}x${Math.round(averageMobileHeight)}`,
-      count: mobileCount
-    }
-
+      count: mobileCount,
+    },
   };
 }
 
