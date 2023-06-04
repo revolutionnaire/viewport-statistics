@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('screenWidth').innerText = screen.width;
       document.getElementById('screenHeight').innerText = screen.height;
       document.getElementById('notification').classList.add('hidden');
+      document.getElementById('resolution').classList.remove('hidden');
       document.getElementById('dataViewport').classList.remove('hidden');
       document.getElementById('networkResponse').innerText = data;
     })
