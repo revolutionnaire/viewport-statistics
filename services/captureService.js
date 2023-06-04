@@ -1,7 +1,8 @@
-const db = require('../firebase-config');
+const viewportDataCollectionModel = require('../models/viewportDataCollectionModel');
 
-const captureViewportData = (width, height, userAgent) => {
+const saveViewportData = (width, height, userAgent) => {
   return new Promise((resolve, reject) => {
+    const viewportDataCollection = new viewportDataCollectionModel();
     const deviceType = getDeviceType(userAgent);
 
     if (!width || !height) {
@@ -16,8 +17,7 @@ const captureViewportData = (width, height, userAgent) => {
       timestamp: new Date().toISOString(),
     };
 
-    db.collection('viewportData')
-      .add(data)
+    viewportDataCollection.addViewportData(data)
       .then(() => {
         console.log('Viewport data captured and stored successfully');
         resolve();
@@ -41,4 +41,4 @@ function getDeviceType(userAgent) {
   }
 }
 
-module.exports = { captureViewportData };
+module.exports = { saveViewportData };

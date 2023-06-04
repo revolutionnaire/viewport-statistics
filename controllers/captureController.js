@@ -6,7 +6,7 @@ const captureController = (req, res) => {
 
   // Check if cookies exist
   if (!req.cookies.viewportDataSaved) {
-    captureService.captureViewportData(width, height, userAgent)
+    captureService.saveViewportData(width, height, userAgent)
       .then(() => {
         const time = new Date();
         const cookieExpiration = time.getTime() + 10 * 365 * 24 * 60 * 60 * 1000;
