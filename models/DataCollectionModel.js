@@ -1,8 +1,8 @@
 const db = require('../firebase-config');
 
-class ViewportDataCollectionModel {
-  constructor() {
-    this.collectionName = 'viewportData'; // Name of the Firestore collection
+class DataCollectionModel {
+  constructor(name) {
+    this.collectionName = name; // Name of the Firestore collection
     this.collectionRef = db.collection(this.collectionName);
   }
 
@@ -19,4 +19,4 @@ class ViewportDataCollectionModel {
   }
 }
 
-module.exports = ViewportDataCollectionModel;
+module.exports = DataCollectionModel;

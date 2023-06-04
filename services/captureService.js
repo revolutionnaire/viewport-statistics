@@ -1,8 +1,8 @@
-const viewportDataCollectionModel = require('../models/viewportDataCollectionModel');
+const DataCollectionModel = require('../models/DataCollectionModel');
 
 const saveViewportData = (width, height, userAgent) => {
   return new Promise((resolve, reject) => {
-    const viewportDataCollection = new viewportDataCollectionModel();
+    const viewportDataCollection = new DataCollectionModel('viewportData');
     const deviceType = getDeviceType(userAgent);
 
     if (!width || !height) {

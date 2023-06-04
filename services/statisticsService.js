@@ -1,7 +1,7 @@
-const viewportDataCollectionModel = require('../models/viewportDataCollectionModel');
+const DataCollectionModel = require('../models/DataCollectionModel');
 
 const calculateAverageViewport = async () => {
-  const viewportDataCollection = new viewportDataCollectionModel();
+  const viewportDataCollection = new DataCollectionModel('viewportData');
 
   const allViewportData = await viewportDataCollection.getAllViewportData();
 
