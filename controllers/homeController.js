@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const homeController = (req, res) => {
-  res.render('home', { pageTitle: 'Home' });
+  res.render('homeView', { pageTitle: 'Home' });
 };
 
 module.exports = homeController;
