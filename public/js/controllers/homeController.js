@@ -13,11 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
   })
     .then(response => response.text())
     .then(data => {
-      document.getElementById('viewportWidth').innerText = window.innerWidth;
-      document.getElementById('viewportHeight').innerText = window.innerHeight;
+      document.getElementById('viewportWidth').innerText = width;
+      document.getElementById('viewportHeight').innerText = height;
       document.getElementById('screenWidth').innerText = screen.width;
       document.getElementById('screenHeight').innerText = screen.height;
-      document.getElementById('notification').classList.add('hidden');
       document.getElementById('dataViewport').classList.remove('hidden');
       document.getElementById('dataResolution').classList.remove('hidden');
       document.getElementById('networkResponse').innerText = data;

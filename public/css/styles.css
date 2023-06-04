@@ -85,14 +85,14 @@ hr {
   text-transform: capitalize;
 }
 
-#home .data:first-of-type {
-  margin-bottom: 0;
-}
-
 .footnote,
 #home #appDescription {
   width: 360px;
   text-align: left;
+}
+
+#home .data:first-of-type {
+  margin-bottom: 0;
 }
 
 #statistics .data-secondary {
