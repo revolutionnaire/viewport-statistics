@@ -1,9 +1,9 @@
 // Capture viewport data
-document.addEventListener('DOMContentLoaded', function() {
+function homeController() {
   const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-  // Make a POST request to capture the viewport data
+  // Make a POST request to save the viewport data
   fetch('/capture', {
     method: 'POST',
     headers: {
@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('networkResponse').innerText = data;
     })
     .catch(error => {
-      console.error('Error capturing viewport data:', error);
-      document.getElementById('networkResponse').innerText = "Failed to capture viewport data. Please, try again.";
+      console.error('Error saving viewport data:', error);
+      document.getElementById('networkResponse').innerText = "Failed to save viewport data. Please, try again.";
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', homeController());
