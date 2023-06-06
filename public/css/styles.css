@@ -95,6 +95,10 @@ hr {
   margin-bottom: 0;
 }
 
+#statistics h1 {
+  font-size: 1em;
+}
+
 #statistics .data-secondary {
   text-transform: capitalize;
   margin-bottom: 0;
