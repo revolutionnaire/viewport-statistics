@@ -9,7 +9,8 @@ const generateSitemap = async (routes, req, res) => {
 
   // Add routes to the sitemap
   routes.forEach(route => {
-    smStream.write({ url: route.path, changefreq: route.changefreq, priority: route.priority });
+    if (route.method != 'POST')
+      smStream.write({ url: route.path, changefreq: route.changefreq, priority: route.priority });
   });
 
   // Add more routes as needed

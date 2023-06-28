@@ -8,7 +8,7 @@ const sitemapController = require('./controllers/sitemapController');
 // Define your app's routes
 const routes = [
   { path: '/', method: 'GET', controller: homeController, changefreq: 'monthly', priority: 0.8 },
-  { path: '/capture', method: 'POST', controller: captureController, changefreq: 'monthly', priority: 0.5 },
+  { path: '/capture', method: 'POST', controller: captureController },
   { path: '/statistics', method: 'GET', controller: statisticsController, changefreq: 'monthly', priority: 0.5 }
 ];
 
