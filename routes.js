@@ -21,6 +21,6 @@ routes.forEach(route => {
 });
 
 // Handle sitemap route
-router.get('/sitemap.xml', (req, res) => sitemapController.generateSitemap(routes, req, res));
+router.get('/sitemap.xml', (req, res) => sitemapController(routes, req, res));
 
 module.exports = { router, routes };
