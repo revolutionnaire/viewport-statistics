@@ -3,10 +3,24 @@ const router = express.Router();
 const homeController = require('./controllers/homeController');
 const captureController = require('./controllers/captureController');
 const statisticsController = require('./controllers/statisticsController');
+const sitemapController = require('./controllers/sitemapController');
 
-// Mount the routers
-router.get('/', homeController);
-router.post('/capture', captureController);
-router.get('/statistics', statisticsController);
+// Define your app's routes
+const routes = [
+  { path: '/', method: 'GET', controller: homeController, changefreq: 'monthly', priority: 0.8 },
+  { path: '/capture', method: 'POST', controller: captureController, changefreq: 'monthly', priority: 0.5 },
+  { path: '/statistics', method: 'GET', controller: statisticsController, changefreq: 'monthly', priority: 0.5 }
+];
 
-module.exports = router;
+// Generate the routes dynamically
+routes.forEach(route => {
+  if (route.method === 'GET')
+    router.get(route.path, route.controller);
+  else if (route.method === 'POST')
+    router.post(route.path, route.controller);
+});
+
+// Handle sitemap route
+router.get('/sitemap.xml', (req, res) => sitemapController.generateSitemap(routes, req, res));
+
+module.exports = { router, routes };

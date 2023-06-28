@@ -19,7 +19,7 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 
 // Mount the routes
-app.use('/', routes);
+app.use('/', routes.router);
 
 // Use the public folder to store assets
 app.use(express.static('public'));
