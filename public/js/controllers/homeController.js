@@ -11,7 +11,13 @@ function homeController() {
     },
     body: `width=${width}&height=${height}`
   })
-    .then(response => response.text())
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error('Failed to save viewport data');
+      }
+    })
     .then(data => {
       document.getElementById('viewportWidth').innerText = width;
       document.getElementById('viewportHeight').innerText = height;
@@ -23,8 +29,8 @@ function homeController() {
     })
     .catch(error => {
       console.error('Error saving viewport data:', error);
-      document.getElementById('networkResponse').innerText = "Failed to save viewport data. Please, try again.";
+      document.getElementById('networkResponse').innerText = "Failed to save viewport data. Please try again.";
     });
 }
 
-document.addEventListener('DOMContentLoaded', homeController());
+document.addEventListener('DOMContentLoaded', homeController);
