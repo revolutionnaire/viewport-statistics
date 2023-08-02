@@ -87,8 +87,10 @@ hr {
 
 .footnote,
 #home #appDescription {
-  width: 360px;
+  width: 300px;
   text-align: left;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 #home .data:first-of-type {
@@ -102,6 +104,13 @@ hr {
 #statistics .data-secondary {
   text-transform: capitalize;
   margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .footnote,
+  #home #appDescription {
+    width: 360px;
+  }
 }
 
 @media (min-width: 1180px) {
