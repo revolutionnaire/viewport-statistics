@@ -104,14 +104,6 @@ hr {
     margin: 2em 36px;
   }
 
-  table {
-    border-spacing: 36px;
-  }
-
-  td {
-    display: table-cell;
-  }
-
   .data {
     font-size: 6em;
   }
