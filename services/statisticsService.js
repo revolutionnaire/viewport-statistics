@@ -56,7 +56,7 @@ const calculateAverageViewport = async () => {
   const desktopHeightConfidence = calculateConfidenceInterval(desktopHeights, averageDesktopHeight, desktopViewportCount, 99);
 
   const averageDesktopViewport = {
-    size: `${desktopWidthConfidence.upperBound.toFixed(2)}x${desktopHeightConfidence.upperBound.toFixed(2)}`,
+    size: `${desktopWidthConfidence.lowerBound.toFixed(2)}x${desktopHeightConfidence.lowerBound.toFixed(2)}`,
     count: desktopViewportCount,
   };
 
