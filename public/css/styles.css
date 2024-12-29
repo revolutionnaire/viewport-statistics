@@ -26,25 +26,6 @@ a {
 
 }
 
-table {
-  border-collapse: separate;
-  margin-bottom: 0.67em;
-}
-
-table .data {
-  font-size: 3em;
-  margin-bottom: 0;
-}
-
-td {
-  text-align: center;
-  padding: 1em 12px;
-  border: 6px solid #000;
-  border-radius: 6px;
-  margin: 1em 12px;
-  display: block;
-}
-
 hr {
   background-color: #000;
   height: 1px;
@@ -62,11 +43,13 @@ hr {
 }
 
 .data {
-  font-size: 3em;
+  font-size: 1em;
   margin-top: 0;
+  margin-bottom: 0;
 }
 
-.data sup {
+.data sup,
+.data-secondary sup {
   text-transform: uppercase;
   vertical-align: sub;
 }
@@ -74,11 +57,6 @@ hr {
 .data-secondary {
   font-size: 1em;
   margin-top: 0;
-}
-
-.data-secondary sup {
-  text-transform: uppercase;
-  vertical-align: sub;
 }
 
 .data-secondary .label {
@@ -103,10 +81,17 @@ hr {
 
 #statistics .data-secondary {
   text-transform: capitalize;
-  margin-bottom: 0;
+}
+
+#statistics .data-secondary:nth-of-type(2) {
+  margin-bottom: 0.67em;
 }
 
 @media (min-width: 768px) {
+  h3 {
+    font-size: 3em;
+  }
+
   .footnote,
   #home #appDescription {
     width: 360px;
