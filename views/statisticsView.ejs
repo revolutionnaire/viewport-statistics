@@ -3,16 +3,18 @@
   <%- include('includes/head.ejs'); %>
 <body id="statistics">
   <center>
-    <h1>Average Viewport Dimensions</h1>
+    <h1>Desktop Viewport Dimensions</h1>
     <% if (averageViewport) { %>
       <table>
         <tr>
           <td>
-            <h4 class="label">Desktop</h4>
+            <h4 class="label">Estimated Maximum Average</h4>
             <hr />
-            <h3 class="data"><%= averageViewport.desktop.size %><sup>px</sup></h3>
+            <h3 class="data">≤ <%= averageViewport.desktop.size %><sup>px</sup></h3>
             <hr />
             <h4 class="data-secondary">Out of <%= averageViewport.desktop.count; %> Users</h4>
+            <hr />
+            <h4 class="data-secondary">Confidence Level is 99%</h4>
           </td>
         </tr>
       </table>
