@@ -1,9 +1,9 @@
 const DataCollectionModel = require('../models/DataCollectionModel');
 
-const saveViewportData = (width, height, userAgent) => {
+const saveViewportData = (width, height, deviceType) => {
   return new Promise((resolve, reject) => {
     const viewportDataCollection = new DataCollectionModel('viewportData');
-    const deviceType = getDeviceType(userAgent);
+    const deviceType = deviceType;
 
     if (!width || !height) {
       reject(new Error('Invalid width or height'));
@@ -28,17 +28,5 @@ const saveViewportData = (width, height, userAgent) => {
       });
   });
 };
-
-// Get device type
-function getDeviceType(userAgent) {
-  const mobileKeywords = ['mobile', 'android', 'iphone', 'ipad'];
-  const lowercaseUserAgent = userAgent.toLowerCase();
-
-  if (mobileKeywords.some((keyword) => lowercaseUserAgent.includes(keyword))) {
-    return 'Mobile';
-  } else {
-    return 'Desktop';
-  }
-}
 
 module.exports = { saveViewportData };
