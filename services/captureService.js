@@ -3,7 +3,6 @@ const DataCollectionModel = require('../models/DataCollectionModel');
 const saveViewportData = (width, height, deviceType) => {
   return new Promise((resolve, reject) => {
     const viewportDataCollection = new DataCollectionModel('viewportData');
-    const deviceType = deviceType;
 
     if (!width || !height) {
       reject(new Error('Invalid width or height'));
