@@ -1,31 +1,27 @@
 const DataCollectionModel = require('../models/DataCollectionModel');
 
-const saveViewportData = (width, height, deviceType) => {
-  return new Promise((resolve, reject) => {
-    const viewportDataCollection = new DataCollectionModel('viewportData');
+const saveViewportData = async (width, height, deviceType) => {
+  const viewportDataCollection = new DataCollectionModel('viewportData');
 
-    if (!width || !height) {
-      reject(new Error('Invalid width or height'));
-      return;
-    }
+  // Validate inputs
+  if (!width || !height || isNaN(width) || isNaN(height)) {
+    throw new Error('Invalid width or height');
+  }
 
-    const data = {
-      width: parseInt(width),
-      height: parseInt(height),
-      deviceType,
-      timestamp: new Date().toISOString(),
-    };
+  const data = {
+    width: parseInt(width),
+    height: parseInt(height),
+    deviceType,
+    timestamp: new Date().toISOString(),
+  };
 
-    viewportDataCollection.addViewportData(data)
-      .then(() => {
-        console.log('Viewport data captured and stored successfully');
-        resolve();
-      })
-      .catch((error) => {
-        console.error('Error storing viewport data:', error);
-        reject(error);
-      });
-  });
+  try {
+    await viewportDataCollection.addViewportData(data);
+    console.log('Viewport data captured and stored successfully');
+  } catch (error) {
+    console.error('Error storing viewport data:', error);
+    throw error;
+  }
 };
 
 module.exports = { saveViewportData };
